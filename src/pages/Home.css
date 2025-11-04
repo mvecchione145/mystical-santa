@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Birthstone+Bounce:wght@400;500&display=swap');
+
+:root,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+.home-backdrop {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #182028 0%, #050507 65%, #000000 100%);
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.home-content {
+  position: relative;
+  z-index: 1;
+}
+
+.home-title {
+  font-size: clamp(2rem, 6vw, 5rem);
+  letter-spacing: 0.2rem;
+  font-family: 'Birthstone Bounce', cursive, sans-serif;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.4),
+    0 0 32px rgba(255, 0, 0, 0.8);
+  margin-bottom: 0.75rem;
+}
+
+.home-subtitle {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow:
+    0 0 14px rgba(0, 255, 120, 0.5);
+  letter-spacing: 0.35rem;
+}
+
+.pizza-snow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.pizza-snow .pizza {
+  position: absolute;
+  top: -10%;
+  left: var(--x-position, 50%);
+  font-size: var(--pizza-size, 2rem);
+  animation: pizza-fall var(--pizza-duration, 10s) linear infinite;
+  animation-delay: var(--pizza-delay, 0s);
+  filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.35));
+  opacity: 0;
+}
+
+@keyframes pizza-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(var(--pizza-drift, 0vw), 120vh, 0) rotate(360deg);
+    opacity: 1;
+  }
+}
