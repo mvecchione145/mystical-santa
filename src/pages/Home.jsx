@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 
-const LAUNCHED = true;
+const LAUNCHED = false;
 const MYSTIC_EMOJIS = Array(6).fill("❄️").concat("🍕");
 const pickEmoji = () =>
   MYSTIC_EMOJIS[Math.floor(Math.random() * MYSTIC_EMOJIS.length)];
