@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import elves from "../config/elves.json";
 import "./Reveal.css";
 
@@ -40,6 +40,14 @@ const Reveal = () => {
     PUBLIC_IMAGES[0] ?? ""
   );
   const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const sources = new Set([...PUBLIC_IMAGES, SAD_SNOWMAN]);
+    sources.forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
 
   const pickRandomImage = () => {
     if (!PUBLIC_IMAGES.length) {
@@ -129,17 +137,26 @@ const Reveal = () => {
               </p>
             )}
 
-            {modalState === "success" && (
+            {(modalState === "success" ||
+              (modalState === "error" && selectedImage === SAD_SNOWMAN)) && (
               <>
                 {selectedImage && (
                   <img
                     src={selectedImage}
-                    alt="Mystic elf helper"
+                    alt={
+                      selectedImage === SAD_SNOWMAN
+                        ? "Sad snowman"
+                        : "Mystic elf helper"
+                    }
                     className="reveal-modal__image"
                   />
                 )}
-                <p className="reveal-modal__label">Your match</p>
-                <p className="reveal-modal__name">{matchName}</p>
+                {modalState === "success" && (
+                  <>
+                    <p className="reveal-modal__label">Your match</p>
+                    <p className="reveal-modal__name">{matchName}</p>
+                  </>
+                )}
               </>
             )}
 
