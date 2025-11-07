@@ -17,18 +17,17 @@ const getMatchFromCode = async (code) => {
     throw new Error("Please enter your reveal code.");
   }
 
-  if (!Array.isArray(elves) || elves.length === 0) {
+  if (!elves || typeof elves !== "object") {
     throw new Error("Matches are still being assigned. Please try later.");
   }
 
-  let hash = 0;
-  for (let i = 0; i < trimmed.length; i += 1) {
-    hash = (hash << 5) - hash + trimmed.charCodeAt(i);
-    hash |= 0;
+  const match = elves[trimmed];
+
+  if (!match) {
+    throw new Error("Secret does not match.");
   }
 
-  const index = Math.abs(hash) % elves.length;
-  return { name: elves[index] };
+  return { name: match };
 };
 
 const Reveal = () => {
