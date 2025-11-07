@@ -9,6 +9,7 @@ const PUBLIC_IMAGES = Object.values(
     query: "?url",
   })
 ).map((assetPath) => assetPath.replace("/public", ""));
+const SAD_SNOWMAN = "/sad_snowman.png";
 
 const getMatchFromCode = async (code) => {
   const trimmed = code.trim();
@@ -78,9 +79,11 @@ const Reveal = () => {
       setMatchName(data.name);
       setModalState("success");
     } catch (error) {
-      setErrorMessage(
-        error?.message ?? "We hit a snag fetching your match."
-      );
+      const message = error?.message ?? "We hit a snag fetching your match.";
+      setErrorMessage(message);
+      if (message === "Secret does not match.") {
+        setSelectedImage(SAD_SNOWMAN);
+      }
       setModalState("error");
     }
   };
